@@ -6,10 +6,13 @@ This app is a Blazor Server app (for now) designed:
 3) To play around with MatBlazor material design, Boostrap and general CSS for web dev
 4) To work with a full stack web application
 
-## Tools
+<b>LIVE DEMO:</b> https://rvliving.azurewebsites.net/
+
+## Notes
 Requires .NET 5 <br />
 Uses Dapper for database connectivity <br />
-Database is hosted on an AWS Relational Database Service (RDS) instance
+Database is hosted on an AWS Relational Database Service (RDS) instance <br />
+Website is currently hosted on Azure Web Apps
 
 ## .CSPROJ Packages References
 Dapper <br />
