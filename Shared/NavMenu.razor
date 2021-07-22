@@ -1,0 +1,104 @@
+﻿@using Microsoft.AspNetCore.Components
+
+<style>
+    .mat-nav-item {
+        transition: 0.3s;
+    }
+
+    .mat-nav-item:hover {
+        background-color: rgba(219, 68, 55, 0.5);
+    }
+</style>
+
+@* header *@
+<div class="top-row pl-4 navbar navbar-dark mat-elevation-z4">
+    <a class="navbar-brand" href="">RVLiving</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+@* nav links *@
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <MatNavMenu>
+        <MatNavItem Class="mat-nav-item" Href="" style="color: white" NavLinkMatch="NavLinkMatch.All">
+            <MatIcon Icon="home"></MatIcon> &nbsp; Home
+        </MatNavItem>
+
+        <MatNavSubMenu @bind-Expanded="@navSubMenuOpenState" style="color: white;">
+            <MatNavSubMenuHeader>
+                <MatNavItem AllowSelection="false">
+                    <MatIcon Icon="playlist_add_check"></MatIcon>&nbsp; Checklists
+                </MatNavItem>
+            </MatNavSubMenuHeader>
+            <MatNavSubMenuList>
+                <MatNavItem Class="mat-nav-item" Href="setup">
+                    <MatIcon Icon="backup"></MatIcon>&nbsp; Set Up
+                </MatNavItem>
+                <MatNavItem Class="mat-nav-item" Href="teardown">
+                    <MatIcon Icon="build"></MatIcon>&nbsp; Tear Down
+                </MatNavItem>
+            </MatNavSubMenuList>
+        </MatNavSubMenu>
+
+        @* <MatNavItem Href="counter" style="color: white">
+            <MatIcon Icon="people"></MatIcon> &nbsp; Counter
+            </MatNavItem>
+            <MatNavItem Href="fetchdata" style="color: white">
+            <MatIcon Icon="people"></MatIcon> &nbsp; Fetch Data
+            </MatNavItem> *@
+        <MatNavItem Class="mat-nav-item" Href="inventory" style="color: white">
+            <MatIcon Icon="format_list_numbered"></MatIcon> &nbsp; Inventory
+        </MatNavItem>
+        <MatNavItem Class="mat-nav-item" Href="budgeting" style="color: white">
+            <MatIcon Icon="attach_money"></MatIcon> &nbsp; Budgeting
+        </MatNavItem>
+        <MatNavItem Class="mat-nav-item" Href="forecast" style="color: white">
+            <MatIcon Icon="wb_cloudy"></MatIcon> &nbsp; Destination Forecast
+        </MatNavItem>
+
+        @* <MatNavItem Href="admin/users" style="color: white" Disabled="true">
+            <MatIcon Icon="people"></MatIcon> &nbsp; Accounts
+            </MatNavItem> *@
+
+    </MatNavMenu>
+    @* <ul class="nav flex-column">
+        <li class="nav-item px-3">
+        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+        <span class="oi oi-home" aria-hidden="true"></span> Home
+        </NavLink>
+        </li>
+        <li class="nav-item px-3">
+        <NavLink class="nav-link" href="counter">
+        <span class="oi oi-plus" aria-hidden="true"></span> Counter
+        </NavLink>
+        </li>
+        <li class="nav-item px-3">
+        <NavLink class="nav-link" href="fetchdata">
+        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+        </NavLink>
+        </li>
+        <li class="nav-item px-3">
+        <NavLink class="nav-link" href="admin/users">
+        <span class="oi oi-people" aria-hidden="true"></span> Users
+        </NavLink>
+        </li>
+        </ul> *@
+</div>
+
+@* footer *@
+@* <footer class="drawer-footer page-footer">
+    Questions?
+    </footer> *@
+
+
+@code {
+    private bool collapseNavMenu = true;
+    private bool navSubMenuOpenState = true;
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+}

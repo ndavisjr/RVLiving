@@ -1,0 +1,167 @@
+/* _content/RVLiving/Shared/Components/TopRow.razor.rz.scp.css */
+.top-row[b-9ae3zxq50e] {
+  background-color: #ffffff;
+  border-bottom: 1px solid #d6d5d5;
+  justify-content: flex-end;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.top-row[b-9ae3zxq50e]  i,
+.top-row .btn-link[b-9ae3zxq50e] {
+  white-space: nowrap;
+}
+
+.top-row i:first-child[b-9ae3zxq50e] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640.98px) {
+  .top-row i[b-9ae3zxq50e],
+  .top-row .btn-link[b-9ae3zxq50e] {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 641px) {
+  .top-row[b-9ae3zxq50e] {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+}
+
+.toprowicon[b-9ae3zxq50e] {
+  color: #607d8b;
+  transition: 3ms;
+}
+
+.toprowbtn:hover .toprowicon[b-9ae3zxq50e] {
+  color: #db4437;
+}
+
+.toprowbtn[b-9ae3zxq50e] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* _content/RVLiving/Shared/MainLayout.razor.rz.scp.css */
+.page[b-wuupj40jj2] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* background-color: #efefef; */
+  background-image: linear-gradient(180deg, #f6f6f2 0%, #f6f6f2 70%);
+  overflow-x: hidden;
+}
+
+.main[b-wuupj40jj2] {
+  flex: 1;
+}
+
+.sidebar[b-wuupj40jj2] {
+  background-image: linear-gradient(180deg, #59798a 0%, #193849 70%);
+}
+
+@media (min-width: 641px) {
+  .page[b-wuupj40jj2] {
+    flex-direction: row;
+  }
+
+  .sidebar[b-wuupj40jj2] {
+    width: 250px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+
+  .main > div[b-wuupj40jj2] {
+    padding-left: 2rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+/* _content/RVLiving/Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-5d5nwjed4a] {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-5d5nwjed4a] {
+  height: 3.5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand[b-5d5nwjed4a] {
+  font-size: 1.1rem;
+}
+
+.oi[b-5d5nwjed4a] {
+  width: 2rem;
+  font-size: 1.1rem;
+  vertical-align: text-top;
+  top: -2px;
+}
+
+.nav-item[b-5d5nwjed4a] {
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem;
+}
+
+.nav-item:first-of-type[b-5d5nwjed4a] {
+  padding-top: 1rem;
+}
+
+.nav-item:last-of-type[b-5d5nwjed4a] {
+  padding-bottom: 1rem;
+}
+
+.nav-item[b-5d5nwjed4a]  a {
+  color: #d7d7d7;
+  border-radius: 4px;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  line-height: 3rem;
+}
+
+.nav-item[b-5d5nwjed4a]  a.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.nav-item[b-5d5nwjed4a]  a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.mini .drawer-footer .mdc-button[b-5d5nwjed4a] {
+  min-width: 36px;
+}
+
+.mat-nav-link[b-5d5nwjed4a] {
+  color: #d7d7d7;
+  border-radius: 4px;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  line-height: 3rem;
+}
+
+@media (min-width: 641px) {
+  .navbar-toggler[b-5d5nwjed4a] {
+    display: none;
+  }
+
+  .collapse[b-5d5nwjed4a] {
+    /* Never collapse the sidebar for wide screens */
+    /* display: block; */
+    display: block;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .drawer-footer[b-5d5nwjed4a] {
+    padding: 0;
+  }
+}

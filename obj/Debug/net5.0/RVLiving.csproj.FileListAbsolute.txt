@@ -1,0 +1,7 @@
+C:\Users\ndavisjr\Desktop\RVLiving\bin\Debug\net5.0\RVLiving.exe
+C:\Users\ndavisjr\Desktop\RVLiving\bin\Debug\net5.0\RVLiving.dll
+C:\Users\ndavisjr\Desktop\RVLiving\bin\Debug\net5.0\RVLiving.Views.dll
+C:\Users\ndavisjr\Desktop\RVLiving\bin\Debug\net5.0\MatBlazor.dll
+C:\Users\ndavisjr\Desktop\RVLiving\bin\Debug\net5.0\Dapper.dll
+C:\Users\ndavisjr\Desktop\RVLiving\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+C:\Users\ndavisjr\Desktop\RVLiving\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

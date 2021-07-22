@@ -1,0 +1,171 @@
+@page "/setup"
+
+<style>
+    .main-paper {
+        padding: 10px;
+    }
+
+    .outside-list {
+        margin: 10px;
+
+    }
+
+    .inside-list {
+        margin: 10px;
+    }
+
+    .lists {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<MatPaper Elevation="2" Class="main-paper">
+    <MatH2 Class="main-div-header">Arrival Checklist</MatH2>
+</MatPaper>
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <MatPaper Class="outside-list">
+                <MatH4 Class="main-div-header">Outside</MatH4>
+
+                <MatList SingleSelection="true" TwoLine="true">
+
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Park Vehicle</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Verify water source is working</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Verify Clearances</MatListItemPrimaryText>
+                            <MatListItemSecondaryText>Requires: Measuring stick</MatListItemSecondaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Plug in power</MatListItemPrimaryText>
+                            <MatListItemSecondaryText>Requires: Surge protector</MatListItemSecondaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Place leveling blocks</MatListItemPrimaryText>
+                            <MatListItemSecondaryText>Requires:Leveling blocks</MatListItemSecondaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Chalk wheels</MatListItemPrimaryText>
+                            <MatListItemSecondaryText>Requires: Wheel chalks</MatListItemSecondaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Make sure no one is inside and stairs are up
+                            </MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Lower tailgate</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Lower front jacks until hitch pin barely elevated
+                            </MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Disconnect hitch arm latch pin</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Disengage hitch arm latch</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Disconnect 7 way</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Disconnect breakaway cable</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Pull truck forward</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Auto level</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Connect water</MatListItemPrimaryText>
+                            <MatListItemSecondaryText>Requires: Pressure Regulator, Drinking hose
+                            </MatListItemSecondaryText>
+                        </MatListItemText>
+                    </MatListItem>
+
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Connect sewer hookups</MatListItemPrimaryText>
+                            <MatListItemSecondaryText>Requires: Sewer hose, Accordion, Adapters
+                            </MatListItemSecondaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                </MatList>
+            </MatPaper>
+        </div>
+
+
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <MatPaper Class="inside-list">
+                <MatH4 Class="main-div-header">Inside</MatH4>
+
+                <MatList SingleSelection="true" TwoLine="true">
+
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Bring out slides</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Turn on A/C</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Make sure Refigertor is on electric</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+                    <MatListItem>
+                        <MatListItemText>
+                            <MatListItemPrimaryText>Verify water running</MatListItemPrimaryText>
+                        </MatListItemText>
+                    </MatListItem>
+
+                </MatList>
+            </MatPaper>
+        </div>
+    </div>
+</div>

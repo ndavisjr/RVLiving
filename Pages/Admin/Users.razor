@@ -1,0 +1,77 @@
+﻿@page "/admin/users"
+
+@using RVLiving.Data
+@using RVLiving.Data.Models
+@using RVLiving.Models
+
+@inject IUserData _userDb
+
+<h1>Users</h1>
+
+<h4>Insert New User</h4>
+<EditForm Model="@newUser" OnValidSubmit="@InsertUser">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText id="firstName" @bind-Value="newUser.FirstName" />
+    <InputText id="lastName" @bind-Value="newUser.LastName" />
+    <InputText id="emailAddress" @bind-Value="newUser.EmailAddress" />
+
+    <button type="submit" class="btn btn-primary">Add</button>
+</EditForm>
+
+<h4>List of Users</h4>
+
+@if (users is null)
+{
+    <MatProgressCircle Closed="true" />
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.EmailAddress</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<UserModel> users;
+    private DisplayUserModel newUser = new DisplayUserModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await _userDb.GetUsers();
+    }
+
+    private async Task InsertUser()
+    {
+        UserModel u = new UserModel
+        {
+            FirstName = newUser.FirstName,
+            LastName = newUser.LastName,
+            EmailAddress = newUser.EmailAddress
+        };
+
+        await _userDb.InsertUser(u);
+
+        users.Add(u);
+
+        newUser = new DisplayUserModel();
+    }
+}

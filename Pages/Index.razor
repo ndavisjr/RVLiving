@@ -1,0 +1,149 @@
+﻿@page "/"
+
+<style>
+    .main-div {
+        background-image: url("https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80");
+        background-size: 'cover';
+        background-repeat: 'no-repeat';
+        background-position: 'center';
+        position: 'relative';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-div-overlay {
+        position: 'absolute';
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: 'rgba(0,0,0,.4)';
+    }
+
+    .main-div-text {
+        position: relative;
+        color: white;
+        padding-top: 5rem;
+        padding-bottom: 4rem;
+        margin-left: 3rem;
+        margin-right: 2rem;
+    }
+
+    .main-paper {
+        border-radius: 5px;
+    }
+
+    .demo-mat-card-content {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+</style>
+
+<MatPaper Elevation="2" Class="main-paper">
+    <div class="main-div">
+        <MatH2 Class="main-div-text">Hi there.</MatH2>
+    </div>
+    <div class="main-div-overlay" />
+</MatPaper>
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell">
+            <MatCard class="demo-mat-card">
+                <MatCardContent>
+                    <MatCardMedia Wide="true"
+                        ImageUrl="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80">
+                    </MatCardMedia>
+                    <div class="demo-mat-card-content">
+                        <MatHeadline6 class="demo-mat-card-clean-margin">
+                            Checklists, Checklists, Checklists!
+                        </MatHeadline6>
+                        @* <MatSubtitle2 class="demo-mat-card-clean-margin">
+                            by someone
+                            </MatSubtitle2> *@
+                    </div>
+
+                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                        Tap the links to get to the checklists.
+                    </MatBody2>
+                </MatCardContent>
+                <MatCardActions>
+                    <MatCardActionButtons>
+                        <MatButton Link="setup">Arrival</MatButton>
+                        <MatButton Link="teardown">Departure</MatButton>
+                    </MatCardActionButtons>
+
+                    <MatCardActionIcons>
+                        @* <MatIconButton Link="/setup" Icon="@MatIconNames.Favorite"></MatIconButton> *@
+
+                    </MatCardActionIcons>
+                </MatCardActions>
+            </MatCard>
+        </div>
+        <div class="mat-layout-grid-cell">
+            <MatCard class="demo-mat-card">
+                <MatCardContent>
+                    <MatCardMedia Wide="true"
+                        ImageUrl="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80">
+                    </MatCardMedia>
+                    <div class="demo-mat-card-content">
+                        <MatHeadline6 class="demo-mat-card-clean-margin">
+                            Don't go broke...
+                        </MatHeadline6>
+                        @* <MatSubtitle2 class="demo-mat-card-clean-margin">
+                            by someone
+                            </MatSubtitle2> *@
+                    </div>
+
+                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                        Keep track of your inventory and budget!
+                    </MatBody2>
+                </MatCardContent>
+                <MatCardActions>
+                    <MatCardActionButtons>
+                        <MatButton Link="inventory">Inventory</MatButton>
+                        <MatButton Link="budgeting">Budget</MatButton>
+                    </MatCardActionButtons>
+
+                    <MatCardActionIcons>
+                        @* <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
+                            <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton> *@
+                    </MatCardActionIcons>
+                </MatCardActions>
+            </MatCard>
+        </div>
+        <div class="mat-layout-grid-cell">
+            <MatCard class="demo-mat-card">
+                <MatCardContent>
+                    <MatCardMedia Wide="true"
+                        ImageUrl="https://images.unsplash.com/photo-1529385101576-4e03aae38ffc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80">
+                    </MatCardMedia>
+                    <div class="demo-mat-card-content">
+                        <MatHeadline6 class="demo-mat-card-clean-margin">
+                            What's the weather like?
+                        </MatHeadline6>
+                        @* <MatSubtitle2 class="demo-mat-card-clean-margin">
+                            by someone
+                            </MatSubtitle2> *@
+                    </div>
+
+                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                        Check the weather to where you're going first.
+                    </MatBody2>
+                </MatCardContent>
+                <MatCardActions>
+                    <MatCardActionButtons>
+                        <MatButton Link="forecast">Check the forecast</MatButton>
+                        @* <MatButton>Bookmark</MatButton> *@
+                    </MatCardActionButtons>
+
+                    <MatCardActionIcons>
+                        @* <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
+                            <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton> *@
+                    </MatCardActionIcons>
+                </MatCardActions>
+            </MatCard>
+        </div>
+    </div>
+</div>

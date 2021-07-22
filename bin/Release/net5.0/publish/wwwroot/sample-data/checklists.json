@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "Name": "Set up",
+        "Category": "Arrival",
+        "ChecklistItems": [
+            {
+                "Id": 1,
+                "Name": "Plug in power cord",
+                "Category": "Outdoor",
+                "Priority": 1,
+                "ChecklistId": 1
+            },
+            {
+                "Id": 2,
+                "Name": "chalk wheels",
+                "Category": "Outdoor",
+                "Priority": 2,
+                "ChecklistId": 1
+            },
+            {
+                "Id": 3,
+                "Name": "place blocks under levelers",
+                "Category": "Outdoor",
+                "Priority": 3,
+                "ChecklistId": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "Name": "Tear Down",
+        "Category": "Departure",
+        "ChecklistItems": [
+            {
+                "Id": 1,
+                "Name": "Unplug power cord",
+                "Category": "Outdoor",
+                "Priority": 99,
+                "ChecklistId": 2
+            },
+            {
+                "Id": 2,
+                "Name": "Bring in slides",
+                "Category": "Inside",
+                "Priority": 30,
+                "ChecklistId": 2
+            },
+            {
+                "Id": 3,
+                "Name": "Put pets in truck",
+                "Category": "Truck",
+                "Priority": 6,
+                "ChecklistId": 2
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "Name": "Set up",
+        "Category": "Arrival",
+        "ChecklistItems": [
+            {
+                "Id": 1,
+                "Name": "Plug in power cord",
+                "Category": "Outdoor",
+                "Priority": 1,
+                "ChecklistId": 1
+            },
+            {
+                "Id": 2,
+                "Name": "chalk wheels",
+                "Category": "Outdoor",
+                "Priority": 2,
+                "ChecklistId": 1
+            },
+            {
+                "Id": 3,
+                "Name": "place blocks under levelers",
+                "Category": "Outdoor",
+                "Priority": 3,
+                "ChecklistId": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "Name": "Tear Down",
+        "Category": "Departure",
+        "ChecklistItems": [
+            {
+                "Id": 1,
+                "Name": "Unplug power cord",
+                "Category": "Outdoor",
+                "Priority": 99,
+                "ChecklistId": 2
+            },
+            {
+                "Id": 2,
+                "Name": "Bring in slides",
+                "Category": "Inside",
+                "Priority": 30,
+                "ChecklistId": 2
+            },
+            {
+                "Id": 3,
+                "Name": "Put pets in truck",
+                "Category": "Truck",
+                "Priority": 6,
+                "ChecklistId": 2
+            }
+        ]
+    }
+]

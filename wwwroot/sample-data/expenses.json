@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "expsenseName": "Dump Stations",
+        "amount": 20.0,
+        "category": null
+    },
+    {
+        "id": 2,
+        "expsenseName": "Verizon Phone",
+        "amount": 220.0,
+        "category": null
+    },
+    {
+        "id": 3,
+        "expsenseName": "Propane",
+        "amount": 20.0,
+        "category": null
+    },
+    {
+        "id": 4,
+        "expsenseName": "Truck Payment",
+        "amount": 700.0,
+        "category": null
+    }
+]

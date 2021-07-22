@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "itemName": "50A to 30A Convertor",
+        "purchasedFrom": "Amazon",
+        "purchasedPrice": 30.0,
+        "notes": null
+    },
+    {
+        "id": 2,
+        "itemName": "50ft Drinking Hose",
+        "purchasedFrom": "Walmart",
+        "purchasedPrice": 18.0,
+        "notes": null
+    },
+    {
+        "id": 3,
+        "itemName": "Rhino Sewer Kit",
+        "purchasedFrom": "Amazon",
+        "purchasedPrice": 180.0,
+        "notes": null
+    }
+]

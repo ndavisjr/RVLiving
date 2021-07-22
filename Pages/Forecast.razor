@@ -1,0 +1,303 @@
+@page "/forecast"
+@inject IHttpClientFactory ClientFactory
+
+<style>
+    .infodiv {
+        padding: 2rem;
+    }
+
+    .localConditions {
+        margin-top: 20px;
+    }
+
+    .futureConditions {
+        margin-top: 20px;
+    }
+
+    .provider {
+        font-size: x-small;
+    }
+</style>
+<p>
+    <MatTextField @bind-Value="Location" Label="Where would you like to go today?" Icon="arrow_forward"
+        IconTrailing="true" FullWidth="true" HelperText="ex: Galveston, TX or 77551" HelperTextPersistent="true"
+        @onkeyup="KeyHandler" IconOnClick="GetWxInfo">
+    </MatTextField>
+    <br />
+</p>
+
+<div class="localConditions">
+
+    @if (!(localConditions == null))
+    {
+        <MatH5><strong>@localConditions.Name (@localConditions.Coord.Lat , @localConditions.Coord.Lon)</strong>
+            <em>(as of @UnixTimeStampToDateTime(@localConditions.Dt))</em>
+        </MatH5>
+
+
+        <div class="mat-layout-grid">
+            <div class="mat-layout-grid-inner">
+                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
+                    <MatPaper Elevation="2">
+                        <div class="infodiv">
+                            <span>
+                                Current Conditions:
+                                @foreach (var desc in @localConditions.weather)
+                                {
+                                    <span>@desc.Description </span>
+                                }
+                                <br />
+                                Current Temperature (Feels Like): @localConditions.Main.Temp F
+                                (@localConditions.Main.Feels_Like F)
+                                <br />
+                                High for today: @localConditions.Main.Temp_Max F <br />
+                                Low for today: @localConditions.Main.Temp_Min F <br />
+                                Pressure: @localConditions.Main.Pressure hPa <br />
+                                Humidity: @localConditions.Main.Humidity % <br />
+                                Winds: @localConditions.Wind.Speed mph
+                                @if (@localConditions.Wind.Gust > 0)
+                                {
+                                    <span>gusting to @localConditions.Wind.Gust mph </span>
+                                }
+                                @if (@localConditions.Wind.Deg >= 0)
+                                {
+                                    <span>from the @degToCompass(@localConditions.Wind.Deg)</span>
+                                }
+                            </span>
+                        </div>
+                    </MatPaper>
+                </div>
+                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-8">
+
+                    @if (!(futureConditions == null))
+                    {
+                        <MatPaper Elevation="2">
+                            <div class="infodiv">
+                                <p><strong>Forecast at a glance</strong>
+
+                                <table class="table table-sm table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Conditions</th>
+                                            <th>High (F)</th>
+                                            <th>Low (F)</th>
+                                            <th>Wind (mph)</th>
+                                            <th>Precip Chance (%)</th>
+                                            <th>Pressure (hPa)</th>
+                                            <th>Humidity (%)</th>
+                                            <th>Dewpoint (F)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            @foreach (var cond in @futureConditions.Daily)
+                                            {
+                                            <tr>
+                                                <td>@UnixTimeStampToDateTime(@cond.Dt).ToShortDateString()</td>
+                                                <td>
+                                                        @foreach (var wxDesc in @cond.Weather)
+                                                        {
+                                                        <span>@wxDesc.Description </span>
+                                                        }
+                                                </td>
+                                                <td>@cond.Temp.Max</td>
+                                                <td>@cond.Temp.Min</td>
+                                                <td>@cond.Wind_Speed
+                                                        @if (@cond.Wind_Deg >= 0)
+                                                        {
+                                                        <span> @degToCompass(@cond.Wind_Deg)</span>
+                                                        }
+                                                </td>
+                                                <td>@ConvertPopChance(@cond.Pop)</td>
+                                                <td>@cond.Pressure</td>
+                                                <td>@cond.Humidity</td>
+                                                <td>@cond.Dew_Point</td>
+                                            </tr>
+                                            }
+                                    </tbody>
+                                </table>
+                                </p>
+                            </div>
+                        </MatPaper>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+</div>
+
+
+<div>
+    <MatCaption class="provider"><em>API provided by OpenWeathermap.org</em></MatCaption>
+</div>
+
+@code
+{
+    public string Location
+    {
+        get => _location;
+        set
+        {
+            _location = value;
+            this.StateHasChanged();
+        }
+    }
+
+    private string _location;
+    private string url, city, state;
+    private string apikey = "445c6319af922ff980fcf2a1cbb6b22e";
+    private FutureConditions futureConditions;
+    private LocalConditions localConditions;
+    private double lat, lon = 0;
+    async Task KeyHandler(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+            await GetWxInfo();
+    }
+
+    private async Task GetWxInfo()
+    {
+        await GetLocalConditions();
+
+        lat = localConditions.Coord.Lat;
+        lon = localConditions.Coord.Lon;
+        await GetFutureConditions();
+        this.StateHasChanged();
+    }
+
+    private async Task GetLocalConditions()
+    {
+        // Do we have a zip code or city, state
+        var isNumeric = int.TryParse(Location, out int zip);
+
+        if (isNumeric)
+        {
+            url = $"https://api.openweathermap.org/data/2.5/weather?zip={zip},us&appid={apikey}&units=imperial";
+        }
+        else
+        {
+            url = "string";
+            string[] locationDetails = Location.Split(',');
+            city = locationDetails[0];
+            state = "US-" + locationDetails[1].Trim();
+
+            url = $"https://api.openweathermap.org/data/2.5/weather?q={city},{state}&appid={apikey}&units=imperial";
+        }
+
+        var client = ClientFactory.CreateClient();
+        localConditions = await client.GetJsonAsync<LocalConditions>(url);
+    }
+
+    private async Task GetFutureConditions()
+    {
+        var exclude = "current,minutely,hourly,alerts";
+
+        url =
+        $"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={exclude}&appid={apikey}&units=imperial";
+
+        var client = ClientFactory.CreateClient();
+        futureConditions = await client.GetJsonAsync<FutureConditions>(url);
+    }
+
+
+    public class LocalConditions
+    {
+        public Coordinates Coord { get; set; }
+        public CurrentWeather[] weather { get; set; }
+        public MainCond Main { get; set; }
+        public WindCond Wind { get; set; }
+        public double Dt { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class Coordinates
+    {
+        public double Lat { get; set; }
+        public double Lon { get; set; }
+    }
+
+    public class CurrentWeather
+    {
+        public int Id { get; set; }
+        public string Main { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class MainCond
+    {
+        public double Temp { get; set; }
+        public double Feels_Like { get; set; }
+        public double Temp_Min { get; set; }
+        public double Temp_Max { get; set; }
+        public double Pressure { get; set; }
+        public double Humidity { get; set; }
+    }
+
+    public class WindCond
+    {
+        public double Speed { get; set; }
+        public int Deg { get; set; }
+        public double Gust { get; set; }
+    }
+
+    public class FutureConditions
+    {
+        public double Lat { get; set; }
+        public double Lon { get; set; }
+        public DailyCond[] Daily { get; set; }
+
+    }
+
+    public class DailyCond
+    {
+        public double Dt { get; set; }
+        public DailyTemp Temp { get; set; }
+        public double Pop { get; set; }
+        public double Pressure { get; set; }
+        public double Humidity { get; set; }
+        public double Dew_Point { get; set; }
+        public double Wind_Speed { get; set; }
+        public double Wind_Deg { get; set; }
+        public DailyWeather[] Weather { get; set; }
+    }
+
+    public class DailyTemp
+    {
+        public double Min { get; set; }
+        public double Max { get; set; }
+    }
+
+    public class DailyWeather
+    {
+        public int Id { get; set; }
+        public string Main { get; set; }
+        public string Description { get; set; }
+    }
+
+    private string degToCompass(double degrees)
+    {
+        degrees *= 10;
+
+        string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW",
+"NNW", "N" };
+        return caridnals[(int)Math.Round(((double)degrees % 3600) / 225)];
+    }
+
+    public DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+    {
+        // Unix timestamp is seconds past epoch
+        System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+        return dtDateTime;
+    }
+
+    private int ConvertPopChance(double pop)
+    {
+        return (int)((double)pop * 100);
+    }
+}

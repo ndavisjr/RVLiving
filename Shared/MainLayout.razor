@@ -1,0 +1,27 @@
+﻿@inherits LayoutComponentBase
+@using RVLiving.Shared.Components
+
+<MatThemeProvider Theme="@theme1">
+
+    <div class="page">
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+
+        <div class="main">
+            <TopRow />
+
+            <div class="content px-4">
+                @Body
+            </div>
+        </div>
+    </div>
+</MatThemeProvider>
+
+@code {
+    MatTheme theme1 = new MatTheme()
+    {
+        Primary = "#DB4437",
+        Secondary = "#607D8B"
+    };
+}

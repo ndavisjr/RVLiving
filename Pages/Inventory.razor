@@ -1,0 +1,160 @@
+@page "/inventory"
+
+@using RVLiving.Data
+@using RVLiving.Data.Models
+@using RVLiving.Models
+
+@inject IItemData _itemDb
+@inject NavigationManager NavigationManager
+
+<style>
+    .infodiv {
+        padding: 2rem;
+        width: 100%;
+    }
+
+    .add-item {
+        padding-top: 2rem;
+        left: 0;
+    }
+
+    .items {
+        margin-top: 20px;
+    }
+
+    .app-fab--absolute {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .app-fab--absolute2 {
+        position: fixed;
+        bottom: 1rem;
+        right: 5rem;
+        background-color: #DB4437;
+    }
+</style>
+
+<MatH4>Inventory Items</MatH4>
+<MatFAB Class="app-fab--absolute2" Icon="@MatIconNames.Add" OnClick="@OpenAddItemDialog"></MatFAB>
+<MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Edit" OnClick="@NavigateToEditPage"></MatFAB>
+
+<div class="add-item">
+    @* <MatButton OnClick="@OpenAddItemDialog" Raised="true">Add New Item</MatButton> *@
+
+    <MatDialog @bind-IsOpen="@dialogIsOpen">
+        <EditForm Model="@newItem" OnValidSubmit="@InsertItem">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <MatDialogTitle>Add New Item</MatDialogTitle>
+            <MatDialogContent>
+                <p>
+                    <MatTextField id="itemName" @bind-Value="newItem.ItemName" Label="Item" Icon="label" />
+                </p>
+                <p>
+                    <MatTextField id="purchasedFrom" @bind-Value="newItem.PurchasedFrom" Label="Purchased From"
+                        Icon="store" />
+                </p>
+                <p>
+                    <MatTextField id="category" @bind-Value="newItem.Category" Label="Category" Icon="category" />
+                </p>
+                <p>
+                    <MatTextField id="price" @bind-Value="newItem.Price" Label="Price" Icon="monetization_on" />
+                </p>
+                <p>
+                    <MatTextField id="notes" @bind-Value="newItem.Notes" Label="Notes" Icon="notes" />
+                </p>
+            </MatDialogContent>
+            <MatDialogActions>
+                <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                <MatButton Type="submit">Add</MatButton>
+            </MatDialogActions>
+        </EditForm>
+    </MatDialog>
+    @* <MatButton Link="admin/editinventory" Icon="edit">Edit</MatButton> *@
+</div>
+
+<div class="items">
+    @if (items is null)
+    {
+        <MatProgressCircle Closed="true" />
+    }
+    else
+    {
+        <MatPaper Elevation="2">
+            <div class="infodiv">
+                <table class="table table-sm table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Purchased From</th>
+                            <th>Category</th>
+                            <th>Price ($)</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in items)
+                        {
+                            <tr>
+                                <td>@item.ItemName</td>
+                                <td>@item.PurchasedFrom</td>
+                                <td>@item.Category</td>
+                                <td>@item.Price</td>
+                                <td>@item.Notes</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </MatPaper>
+    }
+</div>
+
+@code {
+    private bool dialogIsOpen = false;
+    private List<ItemModel> items;
+    private DisplayItemModel newItem = new DisplayItemModel();
+
+    private void OpenAddItemDialog()
+    {
+        dialogIsOpen = true;
+        newItem = new DisplayItemModel();
+    }
+
+    private void NavigateToEditPage()
+    {
+        NavigationManager.NavigateTo("admin/editinventory");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = await _itemDb.GetItems();
+    }
+
+    private async Task InsertItem()
+    {
+        dialogIsOpen = false;
+
+        // create new Item from the form values
+        ItemModel i = new ItemModel
+        {
+            ItemName = newItem.ItemName,
+            PurchasedFrom = newItem.PurchasedFrom,
+            Category = newItem.Category,
+            Price = newItem.Price,
+            Notes = newItem.Notes
+        };
+
+        // insert item into the db
+        await _itemDb.InsertItem(i);
+
+        // display newly created without doing another call to the db
+        items.Add(i);
+
+        // clear the new item so it's ready for use again
+        newItem = new DisplayItemModel();
+    }
+}

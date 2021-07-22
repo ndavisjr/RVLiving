@@ -1,0 +1,263 @@
+@page "/teardown"
+
+<style>
+    .main-paper {
+        padding: 10px;
+    }
+
+    .outside-list {
+        margin: 10px;
+
+    }
+
+    .inside-list {
+        margin: 10px;
+    }
+
+    .lists {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .inside-list-text {
+        margin: 10px
+    }
+
+    .main-div-header {
+        padding-top: 15px;
+    }
+</style>
+
+<MatPaper Elevation="2" Class="main-paper">
+    <MatH2 Class="main-header">Departure Checklist</MatH2>
+</MatPaper>
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <MatPaper Class="outside-list">
+                <div class="inside-list-text">
+                    <MatH4 Class="main-div-header">Outside</MatH4>
+
+
+                    <MatList SingleSelection="true" TwoLine="true">
+
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Bring in awnings</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Stow outside items, grill, smoker, rugs</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Make sure stairs are up</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Add fresh water (if needed)</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Empty holding tanks, add chemicals, shut valves (if sewer
+                                    hookup)
+                                </MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Disonnect sewer hookup</MatListItemPrimaryText>
+                                <MatListItemSecondaryText>Requires: Sewer hose, Accordion, Adapters
+                                </MatListItemSecondaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Disconnect water </MatListItemPrimaryText>
+                                <MatListItemSecondaryText>Requires: Pressure Regulator, Drinking hose
+                                </MatListItemSecondaryText>
+                            </MatListItemText>
+                        </MatListItem>
+
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Disconnect TV/Cable</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Turn propane off</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Remove leveling blocks </MatListItemPrimaryText>
+                                <MatListItemSecondaryText>Requires: Leveling blocks</MatListItemSecondaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Unchalk wheels </MatListItemPrimaryText>
+                                <MatListItemSecondaryText>Requires: Wheel chalks</MatListItemSecondaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Lock storage bays</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Disconnect power </MatListItemPrimaryText>
+                                <MatListItemSecondaryText>Requires: Surge protector, 50A to 30A converter
+                                </MatListItemSecondaryText>
+                            </MatListItemText>
+                        </MatListItem>
+
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Check fluids</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Check tire pressure</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Initial walkaround</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Lower tailgate</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Engage hitch arm</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Back tuck until pin latches</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Lock hitch arm and pin</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Connect 7 way</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Connect breakaway cable</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Raise front jacks until barely off ground
+                                </MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Brake Controller test</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Retract all leverls and stabilizers</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Check turn signals and brake lights</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Final walk around</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Adjust mirrors</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Turn on exhaust break</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+
+
+                    </MatList>
+                </div>
+            </MatPaper>
+        </div>
+
+
+        <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
+            <MatPaper Class="inside-list">
+                <div class="inside-list-text">
+                    <MatH4 Class="main-div-header">Inside</MatH4>
+
+
+                    <MatList SingleSelection="true" TwoLine="true">
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Secure loose items</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Secure cabinets, drawers and doors</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Secure appliances and electronics</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Turn off A/C, hot water and water pump</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Empty trash</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Load up vehicle with travel items</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+                        <MatListItem>
+                            <MatListItemText>
+                                <MatListItemPrimaryText>Bring in slides</MatListItemPrimaryText>
+                            </MatListItemText>
+                        </MatListItem>
+
+                    </MatList>
+                </div>
+            </MatPaper>
+        </div>
+    </div>
+</div>

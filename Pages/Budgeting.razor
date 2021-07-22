@@ -1,0 +1,151 @@
+@page "/budgeting"
+
+@using RVLiving.Data
+@using RVLiving.Data.Models
+@using RVLiving.Models
+
+@inject IExpenseData _expenseDb
+@inject NavigationManager NavigationManager
+
+<style>
+    .infodiv {
+        padding: 2rem;
+        width: 100%;
+    }
+
+    .add-expense {
+        padding-top: 2rem;
+        left: 0;
+    }
+
+    .expenses {
+        margin-top: 20px;
+    }
+
+    .app-fab--absolute {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .app-fab--absolute2 {
+        position: fixed;
+        bottom: 1rem;
+        right: 5rem;
+        background-color: #DB4437;
+    }
+</style>
+
+<MatH4>Expenses</MatH4>
+<MatFAB Class="app-fab--absolute2" Icon="@MatIconNames.Add" OnClick="@OpenAddExpenseDialog"></MatFAB>
+<MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Edit" OnClick="@NavigateToEditPage"></MatFAB>
+
+<div class="add-expense">
+    @* <MatButton OnClick="@OpenAddExpenseDialog" Raised="true">Add New Expense</MatButton> *@
+
+    <MatDialog @bind-IsOpen="@dialogIsOpen">
+        <EditForm Model="@newExpense" OnValidSubmit="@InsertExpense">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <MatDialogTitle>Add New Expense</MatDialogTitle>
+            <MatDialogContent>
+                <p>
+                    <MatTextField id="expenseName" @bind-Value="newExpense.ExpenseName" Label="Expense" Icon="label" />
+                </p>
+                <p>
+                    <MatTextField id="amount" @bind-Value="newExpense.Amount" Label="Cost" Icon="monetization_on" />
+                </p>
+                <p>
+                    <MatTextField id="category" @bind-Value="newExpense.Category" Label="Category" Icon="category" />
+                </p>
+                <p>
+                    <MatTextField id="notes" @bind-Value="newExpense.Notes" Label="Notes" Icon="notes" />
+                </p>
+            </MatDialogContent>
+            <MatDialogActions>
+                <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                <MatButton Type="submit">Add</MatButton>
+            </MatDialogActions>
+        </EditForm>
+    </MatDialog>
+    @* <MatButton Link="admin/editbudget" Icon="edit">Edit</MatButton> *@
+</div>
+<div class="expenses">
+    @if (expenses is null)
+    {
+        <MatProgressCircle Closed="true" />
+    }
+    else
+    {
+        <MatPaper Elevation="2">
+            <div class="infodiv">
+                <table class="table table-sm table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Expense</th>
+                            <th>Price ($)</th>
+                            <th>Category</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var expense in expenses)
+                        {
+                            <tr>
+                                <td>@expense.ExpenseName</td>
+                                <td>@expense.Amount</td>
+                                <td>@expense.Category</td>
+                                <td>@expense.Notes</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </MatPaper>
+    }
+</div>
+
+@code {
+    private bool dialogIsOpen = false;
+    private void OpenAddExpenseDialog()
+    {
+        dialogIsOpen = true;
+    }
+
+    private void NavigateToEditPage()
+    {
+        NavigationManager.NavigateTo("admin/editbudget");
+    }
+
+    private List<ExpenseModel> expenses;
+    private DisplayExpenseModel newExpense = new DisplayExpenseModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        expenses = await _expenseDb.GetExpenses();
+    }
+
+    private async Task InsertExpense()
+    {
+        dialogIsOpen = false;
+
+        // create new Item from the form values
+        ExpenseModel e = new ExpenseModel
+        {
+            ExpenseName = newExpense.ExpenseName,
+            Amount = newExpense.Amount,
+            Category = newExpense.Category,
+            Notes = newExpense.Notes
+        };
+
+        // insert item into the db
+        await _expenseDb.InsertExpense(e);
+
+        // display newly created without doing another call to the db
+        expenses.Add(e);
+
+        // clear the new item so it's ready for use again
+        newExpense = new DisplayExpenseModel();
+    }
+}

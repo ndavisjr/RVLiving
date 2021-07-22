@@ -1,0 +1,162 @@
+@page "/admin/editinventory"
+
+@using RVLiving.Data
+@using RVLiving.Data.Models
+@using RVLiving.Models
+
+@inject IItemData _itemDb
+
+<style>
+    .infodiv {
+        padding: 2rem;
+        width: 100%;
+    }
+
+    .done {
+        padding-top: 2rem;
+        left: 0;
+    }
+
+    .items {
+        margin-top: 20px;
+    }
+</style>
+
+<MatH4>Edit Inventory Items</MatH4>
+
+<div class="done">
+    <MatButton Link="inventory" Raised="true">Done</MatButton>
+</div>
+
+<div class="items">
+    @if (items is null)
+    {
+        <MatProgressCircle Closed="true" />
+    }
+    else
+    {
+        <MatPaper Elevation="2">
+            <div class="infodiv">
+                <table class="table table-sm table-responsive">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Item</th>
+                            <th>Purchased From</th>
+                            <th>Category</th>
+                            <th>Price ($)</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in items)
+                        {
+                            <tr>
+                                <td>
+                                    <MatButton Outlined="true" Icon="edit" OnClick="() => OpenEditItemDialog(item)">Edit
+                                    </MatButton>
+
+                                    <MatDialog @bind-IsOpen="@dialogIsOpen">
+                                        <MatDialogTitle>Edit Item</MatDialogTitle>
+                                        <MatDialogContent>
+                                            <p>
+                                                <MatTextField id="itemName" @bind-Value="editItem.ItemName" Label="Item"
+                                            Icon="label" />
+                                            </p>
+                                            <p>
+                                                <MatTextField id="purchasedFrom" @bind-Value="editItem.PurchasedFrom"
+                                            Label="Purchased From" Icon="store" />
+                                            </p>
+                                            <p>
+                                                <MatTextField id="category" @bind-Value="editItem.Category" Label="Category"
+                                            Icon="category" />
+                                            </p>
+                                            <p>
+                                                <MatTextField id="price" @bind-Value="editItem.Price" Label="Price"
+                                            Icon="monetization_on" />
+                                            </p>
+                                            <p>
+                                                <MatTextField id="notes" @bind-Value="editItem.Notes" Label="Notes"
+                                            Icon="notes" />
+                                            </p>
+                                        </MatDialogContent>
+                                        <MatDialogActions>
+                                            <MatButton OnClick="@(e => { dialogIsOpen = false; })">Cancel</MatButton>
+                                            <MatButton OnClick="() => UpdateItem(editItem)">Update</MatButton>
+                                        </MatDialogActions>
+                                    </MatDialog>
+
+                                    <MatButton Unelevated="true" Icon="delete_outline" OnClick="() => ConfirmDelete(item)">
+                                        Delete</MatButton>
+
+                                    <MatDialog @bind-IsOpen="@deleteDialogIsOpen">
+                                        <MatDialogTitle>Delete Item</MatDialogTitle>
+                                        <MatDialogContent>
+                                            <MatSubtitle1>Are you sure you want to delete this item?</MatSubtitle1>
+                                        </MatDialogContent>
+                                        <MatDialogActions>
+                                            <MatButton OnClick="@(e => { deleteDialogIsOpen = false; })">Cancel</MatButton>
+                                            <MatButton OnClick="() => DeleteItem(editItem)">Delete</MatButton>
+                                        </MatDialogActions>
+                                    </MatDialog>
+                                </td>
+
+                                <td>@item.ItemName</td>
+                                <td>@item.PurchasedFrom</td>
+                                <td>@item.Category</td>
+                                <td>@item.Price</td>
+                                <td>@item.Notes</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </MatPaper>
+    }
+</div>
+
+@code {
+    private bool dialogIsOpen, deleteDialogIsOpen = false;
+    private ItemModel editItem = new ItemModel();
+
+    private void OpenEditItemDialog(ItemModel item)
+    {
+        this.editItem = item;
+        dialogIsOpen = true;
+    }
+
+    private void ConfirmDelete(ItemModel item)
+    {
+        this.editItem = item;
+        deleteDialogIsOpen = true;
+    }
+
+    private List<ItemModel> items;
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = await _itemDb.GetItems();
+    }
+
+    private async Task DeleteItem(ItemModel item)
+    {
+        deleteDialogIsOpen = false;
+
+        // delete item from db
+        await _itemDb.DeleteItem(item);
+
+        // display new list minus deleted item without doing another call to the db
+        items.Remove(item);
+    }
+
+    private async Task UpdateItem(ItemModel item)
+    {
+        dialogIsOpen = false;
+
+        // update item in db
+        await _itemDb.UpdateItem(item);
+
+        //update the view
+        this.StateHasChanged();
+    }
+}
