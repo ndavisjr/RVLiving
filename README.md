@@ -5,6 +5,7 @@ This app is a Blazor Server app (for now) designed:
 2) To act as a personal website for our RV trips (fully responsive)
 3) To play around with MatBlazor material design, Boostrap and general CSS for web dev
 4) To work with a full stack web application
+5) To create a interface to consume OpenWeatherAPI's and display the JSON results
 
 <b>LIVE DEMO:</b> https://rvliving.azurewebsites.net/
 
