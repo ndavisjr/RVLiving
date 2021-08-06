@@ -18,31 +18,28 @@ namespace RVLiving.Data
 
         public Task<List<ExpenseModel>> GetExpenses()
         {
-            string sql = "select * from dbo.ExpenseItems";
+            string sql = "exec dbo.spExpenseItems_GetAll";
 
             return _db.LoadData<ExpenseModel, dynamic>(sql, new { });
         }
 
         public Task InsertExpense(ExpenseModel expense)
         {
-            string sql = @"insert into dbo.ExpenseItems (ExpenseName, Amount, Category, Notes)
-                            values (@ExpenseName, @Amount, @Category, @Notes);";
+            string sql = @"exec dbo.spExpenseItems_InsertExpenseItem @ExpenseName, @Amount, @Category, @Notes";
 
             return _db.SaveData(sql, expense);
         }
 
         public Task DeleteExpense(ExpenseModel expense)
         {
-            string sql = "delete from dbo.ExpenseItems where Id = @Id;";
+            string sql = @"exec dbo.spExpenseItems_DeleteExpenseItem @Id";
 
             return _db.DeleteData(sql, expense);
         }
 
         public Task UpdateExpense(ExpenseModel expense)
         {
-            string sql = @"update dbo.ExpenseItems 
-                            set ExpenseName = @ExpenseName, Amount = @Amount, Category = @Category, Notes = @Notes
-                            where Id = @Id;";
+            string sql = @"exec dbo.spExpenseItems_UpdateExpenseItem  @ExpenseName, @Amount, @Category, @Notes, @Id";
 
             return _db.UpdateData(sql, expense);
         }
